@@ -12,8 +12,25 @@ function Form(props) {
     setLastName(event.target.value);
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    // Create a formData object to hold the values
+    const formData = {
+      firstName: firstName,
+      lastName: lastName
+    };
+
+    // Call the parent component's callback function to handle the form data
+    props.onSubmit(formData);
+
+    // Clear the form fields after submission
+    setFirstName("");
+    setLastName("");
+  }
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <input type="text" onChange={handleFirstNameChange} value={firstName} />
       <input type="text" onChange={handleLastNameChange} value={lastName} />
       <button type="submit">Submit</button>
